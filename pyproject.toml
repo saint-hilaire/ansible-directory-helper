@@ -10,7 +10,7 @@ version = "0.1.0"
 authors = [
     {name="Brian St. Hilaire", email="brian.st-hilaire@sanctus-tech.com"}
 ]
-description = "A small helper library to manage local directories for Ansible"
+description = "A small helper library to manage local directories for Ansible Runner"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

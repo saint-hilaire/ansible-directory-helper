@@ -80,5 +80,5 @@ r.run()
 ### Running unit tests
 
 ```
-python -m unittest test/test_inventory_file.py
+python -m unittest
 ```

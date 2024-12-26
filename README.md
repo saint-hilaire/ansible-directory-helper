@@ -9,17 +9,7 @@ Ansible Runner might find this useful.
 
 ### Installing
 
-Do something like this:
-
-```
-# pyproject.toml
-...
-dependencies = [
-    ...
-    "ansible-directory-helper@git+https://github.com/saint-hilaire/ansible-directory-helper",
-    ...
-]
-```
+Install with Pip: `python -m pip install ansible-directory-helper`
 
 ### Usage
 

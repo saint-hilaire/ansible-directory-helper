@@ -56,6 +56,30 @@ class TestPrivateData(unittest.TestCase):
                 },
             },
         }
+        self.EXPECTED_LOCAL_INVENTORY = {
+            'all': {'hosts': {}},
+            'ungrouped': {'hosts': {}},
+            'group1': {
+                'hosts': {
+                    'localhost': {
+                        'ansible_user': 'user1',
+                        'inventory_dir': None,
+                        'inventory_file': None,
+                        'ansible_connection': 'local',
+                    },
+                },
+            },
+            'group2': {
+                'hosts': {
+                    '127.0.0.1': {
+                        'ansible_user': 'user2',
+                        'inventory_dir': None,
+                        'inventory_file': None,
+                        'ansible_connection': 'local',
+                    },
+                },
+            },
+        }
         self.private_data = PrivateData(self.TEST_PRIVATE_DATA_DIR)
 
 
@@ -104,6 +128,31 @@ class TestPrivateData(unittest.TestCase):
                 yaml.safe_load(f),
                 self.EXPECTED_INVENTORY
             )
+
+
+    def test_inventory_localhost(self):
+        self.private_data.add_inventory_groups([
+            'group1',
+            'group2',
+        ])
+        self.private_data.add_inventory_host('localhost', 'group1')
+        self.private_data.add_inventory_host('127.0.0.1', 'group2')
+        self.private_data.set_inventory_ansible_user('localhost', 'user1')
+        self.private_data.set_inventory_ansible_user('127.0.0.1', 'user2')
+
+        self.private_data.write_inventory()
+
+        with open(
+            os.path.join(
+                self.TEST_INVENTORY_DIR,
+                'hosts'
+            ), 'r'
+        ) as f:
+            self.assertEqual(
+                yaml.safe_load(f),
+                self.EXPECTED_LOCAL_INVENTORY
+            )
+
 
 
 if __name__ == '__main__':

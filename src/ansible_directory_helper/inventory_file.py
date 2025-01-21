@@ -52,6 +52,10 @@ class InventoryFile():
                 ret_dict[group]['hosts'][host.address] = {
                     key: val for key, val in host.vars.items()
                 }
+                if host.address in ['localhost', '127.0.0.1']:
+                    ret_dict[group]['hosts'][host.address][
+                        'ansible_connection'
+                    ] = 'local'
         return ret_dict
 
 

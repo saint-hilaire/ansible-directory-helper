@@ -1,3 +1,4 @@
+import warnings
 import os
 from shutil import rmtree
 from .inventory_file import InventoryFile
@@ -16,6 +17,8 @@ class PrivateData:
     )
 
     def __init__(self, dir_path):
+        warnings.warn('ansible-directory-helper is deprecated!', DeprecationWarning)
+
         self.dir_path = dir_path
         self.init_dir()
         self.init_inventory(PrivateData.DEFAULT_INVENTORY_PATH)
